@@ -1,0 +1,15 @@
+default:
+  host: localhost
+  port: 3306
+  user: root
+  pass: password
+  database: orm_mysql
+
+dev:
+  <<: *default
+
+prod:
+  <<: *default
+  database: orm_mysql_prod
+  user: <%= ENV['MYSQL_USER'] || "root" %>
+  pass: <%= ENV['MYSQL_PASSWORD'] || "root" %>
