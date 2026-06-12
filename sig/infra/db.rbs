@@ -1,0 +1,7 @@
+module Infra
+  class Db
+    @client: untyped
+
+    def execute: -> void
+  end
+end
