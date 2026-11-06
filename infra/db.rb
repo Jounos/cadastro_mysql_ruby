@@ -7,7 +7,8 @@ module Infra
     def initialize
 
       env = ENV["APP_ENV"] || "dev"
-      db_config = Psych.safe_load(ERB.new(File.read('config/database.yml')).result, aliases: true)
+      yaml_content = ERB.new(File.read('config/database.yml')).result
+      db_config = Psych.safe_load(yaml_content, aliases: true)
       config = db_config[env]
 
       @client = Mysql2::Client.new(
@@ -17,12 +18,9 @@ module Infra
         password: config['pass'],
         database: config['database']
       )
-
-      puts @client
     end
 
     def execute(sql, params = [])
-      # Implementation for executing SQL queries
       begin
         statement = @client.prepare(sql)
         result = statement.execute(*params)
