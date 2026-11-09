@@ -42,7 +42,7 @@ module ORM
           end
         end
 
-        sql = "INSERT INTO #{tabela}(#{colunas.join(", ")}) VLUES (#{colunas.map{|c| "?"}}.join(", ")})"
+        sql = "INSERT INTO #{tabela}(#{colunas.join(", ")}) VALUES (#{colunas.map{|c| "?"}}.join(", ")})"
         params = []
 
         colunas.each do |coluna|
